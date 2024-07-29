@@ -31,7 +31,7 @@ const App = () => {
                 getUserLocation();
             })
             .catch((error) => {
-                toast.error('Login failed:', error);
+                toast.error('Login failed:', error.message);
             });
     };
 
@@ -46,7 +46,13 @@ const App = () => {
                     getUserLocation();
                 })
                 .catch((error) => {
-                    toast.error('Sign up failed:', error);
+                    if (error.code === 'auth/email-already-in-use') {
+                        toast.error('Email already in use');
+                    }
+
+                    if (error.code === 'auth/weak-password') {
+                        toast.error('Weak password');
+                    }
                 });
         } else {
             signInWithEmailAndPassword(auth, email, password)
@@ -56,7 +62,13 @@ const App = () => {
                     getUserLocation();
                 })
                 .catch((error) => {
-                    toast.error('Login failed:', error);
+                    if (error.code === 'auth/user-not-found') {
+                        toast.error('User not found');
+                    }
+
+                    if (error.code === 'auth/invalid-credential') {
+                        toast.error('Wrong password');
+                    }
                 });
         }
     };
