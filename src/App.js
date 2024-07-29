@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState } from 'react';
 import { auth, provider } from './firebaseConfig';
 import { signInWithPopup } from 'firebase/auth';
@@ -9,7 +8,7 @@ const App = () => {
     const [location, setLocation] = useState(null);
 
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: 'AIzaSyD6KKKu50n2CYhYyz8rzv33AmovFUfxV9w',
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
     });
 
     const handleLogin = () => {
